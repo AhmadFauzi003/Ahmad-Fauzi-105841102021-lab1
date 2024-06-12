@@ -1,29 +1,28 @@
 import React from 'react';
 import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 
-const Daftar = () => {
+const LoginPages= () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Daftar</Text>
-      <TextInput style={styles.input} placeholder="Nama" />
+      <Text style={styles.title}>Login</Text>
       <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Kata Sandi" secureTextEntry={true} />
-      <TouchableOpacity style={styles.signUpButton}>
-        <Text style={styles.buttonText}>Daftar</Text>
-      </TouchableOpacity>
-      <View style={styles.textAndIconContainer}>
-        <Text style={styles.loginText}>
-          Sudah punya akun? <Text style={styles.loginLink}>→</Text>
+      <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
+      <TouchableOpacity style={styles.forgotPasswordContainer}>
+        <Text style={styles.forgotPasswordText}>
+          Forgot Password? <Text style={styles.forgotPasswordLink}>→</Text>
         </Text>
-        <Text style={styles.orText}>Atau daftar dengan akun sosial</Text>
-        <View style={styles.socialButtons}>
-          <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('./assets/google.png')} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('./assets/facebook.png')} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.Login}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <Text style={[styles.orText, { marginTop: 40 }]}>Or Login With social media</Text>
+      <View style={styles.socialButtons}>
+        <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
+          <Image source={require('../assets/google.png')} style={styles.icon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
+          <Image source={require('../assets/facebook.png')} style={styles.icon} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -49,14 +48,17 @@ const styles = {
     marginBottom: 15,
     paddingHorizontal: 10,
   },
-  loginText: {
-    alignSelf: 'flex-end', 
+  forgotPasswordContainer: {
+    alignSelf: 'flex-end',
     marginBottom: 20,
   },
-  loginLink: {
+  forgotPasswordText: {
+    color: 'gray',
+  },
+  forgotPasswordLink: {
     color: 'red',
   },
-  signUpButton: {
+ Login: {
     backgroundColor: 'red',
     paddingVertical: 15,
     borderRadius: 20,
@@ -70,11 +72,13 @@ const styles = {
   },
   orText: {
     alignSelf: 'center',
-    marginBottom: 10, 
+    marginBottom: 20,
+    marginTop: 40, 
   },
   socialButtons: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginTop: 10, 
   },
   socialButton: {
     width: 50,
@@ -90,9 +94,6 @@ const styles = {
     width: 24,
     height: 24,
   },
-  textAndIconContainer: {
-    alignItems: 'center', 
-  },
 }
 
-export default Daftar
+export default LoginPages

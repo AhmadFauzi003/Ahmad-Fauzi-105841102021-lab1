@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const LupaPassword = () => {
+const ForgotPassPages = () => {
   const [email, setEmail] = useState('');
   const [isValid, setIsValid] = useState(true);
 
@@ -22,9 +22,9 @@ const LupaPassword = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Lupa Kata Sandi</Text>
+      <Text style={styles.headerText}>Forgot Password</Text>
       <Text style={styles.subText}>
-        Silakan masukkan alamat email Anda. Anda akan menerima tautan untuk membuat kata sandi baru melalui email.
+      Please enter your email address. You will receive a link to create a new password via email.
       </Text>
       <TextInput
         style={[styles.input, !isValid && styles.inputError]}
@@ -34,9 +34,9 @@ const LupaPassword = () => {
         autoCapitalize="none"
         keyboardType="email-address"
       />
-      {!isValid && <Text style={styles.errorText}>Alamat email tidak valid. Harus berupa you@email.com</Text>}
+      {!isValid && <Text style={styles.errorText}>Invalid email address. Must be you@email.com</Text>}
       <TouchableOpacity style={styles.buttonContainer} onPress={handleSend}>
-        <Text style={styles.buttonText}>KIRIM</Text>
+        <Text style={styles.buttonText}>SEND</Text>
       </TouchableOpacity>
     </View>
   );
@@ -95,4 +95,4 @@ const styles = {
   },
 }
 
-export default LupaPassword
+export default ForgotPassPages
