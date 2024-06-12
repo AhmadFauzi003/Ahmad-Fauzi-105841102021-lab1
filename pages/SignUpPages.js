@@ -1,20 +1,27 @@
 import React from 'react';
 import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpPages = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
       <TextInput style={styles.input} placeholder="Name" />
       <TextInput style={styles.input} placeholder="Email" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
-      <TouchableOpacity style={styles.signUpButton}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <View style={styles.textAndIconContainer}>
-        <Text style={styles.loginText}>
-        Already have an account?  <Text style={styles.loginLink}>→</Text>
-        </Text>
+        <View style={styles.loginContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.loginText}>
+              Already have an account? <Text style={styles.loginLink}>→</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
         <Text style={styles.orText}>Or sign up with a social account</Text>
         <View style={styles.socialButtons}>
           <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
@@ -27,7 +34,7 @@ const SignUpPages = () => {
       </View>
     </View>
   );
-}
+};
 
 const styles = {
   container: {
@@ -49,9 +56,12 @@ const styles = {
     marginBottom: 15,
     paddingHorizontal: 10,
   },
-  loginText: {
+  loginContainer: {
     alignSelf: 'flex-end', 
     marginBottom: 20,
+  },
+  loginText: {
+    color: 'black', 
   },
   loginLink: {
     color: 'red',
@@ -70,7 +80,7 @@ const styles = {
   },
   orText: {
     alignSelf: 'center',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   socialButtons: {
     flexDirection: 'row',
@@ -91,8 +101,8 @@ const styles = {
     height: 24,
   },
   textAndIconContainer: {
-    alignItems: 'center', 
+    alignItems: 'center',
   },
-}
+};
 
-export default SignUpPages
+export default SignUpPages;

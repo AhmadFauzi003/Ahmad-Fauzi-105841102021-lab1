@@ -1,13 +1,16 @@
 import React from 'react';
 import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginPages= () => {
+const LoginPages = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
       <TextInput style={styles.input} placeholder="Email" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
-      <TouchableOpacity style={styles.forgotPasswordContainer}>
+      <TouchableOpacity style={styles.forgotPasswordContainer} onPress={() => navigation.navigate('ForgotPassword')}>
         <Text style={styles.forgotPasswordText}>
           Forgot Password? <Text style={styles.forgotPasswordLink}>→</Text>
         </Text>
@@ -26,7 +29,7 @@ const LoginPages= () => {
       </View>
     </View>
   );
-}
+};
 
 const styles = {
   container: {
