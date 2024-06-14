@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useFonts } from 'expo-font';
 
 const ForgotPassPages = () => {
   const [email, setEmail] = useState('');
   const [isValid, setIsValid] = useState(true);
+
+  const [fontsLoaded] = useFonts({
+    'Metropolis-Bold': require('../assets/fonts/Bold.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Font tidak ditemukan!</Text>
+      </View>
+    );
+  }
 
   const validateEmail = (email) => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -22,7 +35,7 @@ const ForgotPassPages = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Forgot Password</Text>
+     <Text style={[styles.headerText, { fontFamily: 'Metropolis-Bold' }]}>Forgot Password</Text>
       <Text style={styles.subText}>
       Please enter your email address. You will receive a link to create a new password via email.
       </Text>
@@ -52,7 +65,6 @@ const styles = {
   },
   headerText: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',     
   },

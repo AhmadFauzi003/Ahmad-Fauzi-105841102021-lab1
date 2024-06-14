@@ -1,27 +1,42 @@
 import React from 'react';
 import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUpPages = () => {
+
+  const [fontsLoaded] = useFonts({
+    'Metropolis-Bold': require('../assets/fonts/Bold.otf'),
+    'Metropolis-Medium': require('../assets/fonts/Medium.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Font tidak ditemukan!</Text>
+      </View>
+    );
+  }
+
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Text style={[styles.title, { fontFamily: 'Metropolis-Bold' }]}>Sign Up</Text>
       <TextInput style={styles.input} placeholder="Name" />
       <TextInput style={styles.input} placeholder="Email" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
       <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <View style={styles.textAndIconContainer}>
-        <View style={styles.loginContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginText}>
-              Already have an account? <Text style={styles.loginLink}>→</Text>
-            </Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.loginContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={[styles.loginText, { fontFamily: 'Metropolis-Medium' }]}>
+            Already have an account? <Text style={styles.loginLink}>→</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.socialSignUpContainer}>
         <Text style={styles.orText}>Or sign up with a social account</Text>
         <View style={styles.socialButtons}>
           <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
@@ -45,7 +60,6 @@ const styles = {
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
     marginBottom: 20,
   },
   input: {
@@ -57,11 +71,11 @@ const styles = {
     paddingHorizontal: 10,
   },
   loginContainer: {
-    alignSelf: 'flex-end', 
+    alignSelf: 'flex-end',
     marginBottom: 20,
   },
   loginText: {
-    color: 'black', 
+    color: 'black',
   },
   loginLink: {
     color: 'red',
@@ -77,6 +91,10 @@ const styles = {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  socialSignUpContainer: {
+    marginTop: 40, 
+    alignItems: 'center',
   },
   orText: {
     alignSelf: 'center',
@@ -99,9 +117,6 @@ const styles = {
   icon: {
     width: 24,
     height: 24,
-  },
-  textAndIconContainer: {
-    alignItems: 'center',
   },
 };
 
