@@ -29,7 +29,7 @@ const LoginPages = () => {
           Forgot Password? <Text style={styles.forgotPasswordLink}>→</Text>
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity style={styles.loginButton} >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <View style={styles.socialLoginContainer}>
