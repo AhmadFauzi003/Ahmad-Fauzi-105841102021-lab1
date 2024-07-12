@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const VisualSearch = () => {
   return (
@@ -9,7 +11,7 @@ const VisualSearch = () => {
     >
       <View style={styles.container}>
         <Text style={styles.title}>Search for an outfit by taking a photo or uploading an image</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button }>
           <Text style={styles.buttonText}>TAKE A PHOTO</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.uploadButton]} >

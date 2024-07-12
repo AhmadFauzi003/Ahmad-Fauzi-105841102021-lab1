@@ -22,7 +22,7 @@ const ProfilePage = () => {
         <Image source={require('../assets/find.png')} style={styles.searchIcon} />
       </View>
       <View style={styles.profileHeader}>
-        <Image source={require('../assets/foto.jpg')} style={styles.profileImage} />
+        <Image source={require('../assets/banner/foto.jpg')} style={styles.profileImage} />
         <View style={styles.profileTextContainer}>
           <Text style={[styles.profileName, { fontFamily: 'Metropolis-Bold' }]}>AHMAD FAUZI SAIFUDDIN</Text>
           <Text style={styles.profileEmail}>fauzi@gmail.com</Text>

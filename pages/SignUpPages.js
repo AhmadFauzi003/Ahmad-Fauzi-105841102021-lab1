@@ -1,14 +1,30 @@
-import React from 'react';
-import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUpPages = () => {
-
   const [fontsLoaded] = useFonts({
     'Metropolis-Bold': require('../assets/fonts/Bold.otf'),
     'Metropolis-Medium': require('../assets/fonts/Medium.otf'),
   });
+
+  const [formSignUp, setForm] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const navigation = useNavigation();
+
+  const onSubmit = () => {
+    if (formSignUp.name && formSignUp.email && formSignUp.password) {
+      alert('Sign Up Berhasil');
+      navigation.navigate('Login');
+    } else {
+      alert('Sign Up Gagal', 'Semua field harus diisi');
+    }
+  };
 
   if (!fontsLoaded) {
     return (
@@ -18,15 +34,32 @@ const SignUpPages = () => {
     );
   }
 
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
       <Text style={[styles.title, { fontFamily: 'Metropolis-Bold' }]}>Sign Up</Text>
-      <TextInput style={styles.input} placeholder="Name" />
-      <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
-      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate('Login')}>
+      <Text>Name</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        onChangeText={(text) => setForm({ ...formSignUp, name: text })}
+        value={formSignUp.name}
+      />
+      <Text>Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        onChangeText={(text) => setForm({ ...formSignUp, email: text })}
+        value={formSignUp.email}
+      />
+      <Text>Password</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry={true}
+        onChangeText={(text) => setForm({ ...formSignUp, password: text })}
+        value={formSignUp.password}
+      />
+      <TouchableOpacity style={styles.signUpButton} onPress={onSubmit}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <View style={styles.loginContainer}>
@@ -40,10 +73,10 @@ const SignUpPages = () => {
         <Text style={styles.orText}>Or sign up with a social account</Text>
         <View style={styles.socialButtons}>
           <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('../assets/google.png')} style={styles.icon} />
+            <Image source={require('../assets/icon/google.png')} style={styles.icon} />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('../assets/facebook.png')} style={styles.icon} />
+            <Image source={require('../assets/icon/facebook.png')} style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>
@@ -93,7 +126,7 @@ const styles = {
     fontWeight: 'bold',
   },
   socialSignUpContainer: {
-    marginTop: 40, 
+    marginTop: 40,
     alignItems: 'center',
   },
   orText: {
@@ -117,6 +150,14 @@ const styles = {
   icon: {
     width: 24,
     height: 24,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 20,
   },
 };
 
