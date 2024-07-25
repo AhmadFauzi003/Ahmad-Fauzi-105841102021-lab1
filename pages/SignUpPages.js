@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ const SignUpPages = () => {
   const navigation = useNavigation();
 
   const onSubmit = () => {
-    if (formSignUp.name && formSignUp.email && formSignUp.password) {
+    if (formSignUp.userName && formSignUp.email && formSignUp.password) {
       alert('Sign Up Berhasil');
       navigation.navigate('Login');
     } else {
@@ -35,88 +35,112 @@ const SignUpPages = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { fontFamily: 'Metropolis-Bold' }]}>Sign Up</Text>
-      <Text>Name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        onChangeText={(text) => setForm({ ...formSignUp, name: text })}
-        value={formSignUp.name}
-      />
-      <Text>Email</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setForm({ ...formSignUp, email: text })}
-        value={formSignUp.email}
-      />
-      <Text>Password</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        onChangeText={(text) => setForm({ ...formSignUp, password: text })}
-        value={formSignUp.password}
-      />
-      <TouchableOpacity style={styles.signUpButton} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-      <View style={styles.loginContainer}>
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        <Text style={[styles.title, { fontFamily: 'Metropolis-Bold' }]}>Sign Up</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="UserName"
+          onChangeText={(text) => setForm({ ...formSignUp, userName: text })}
+          value={formSignUp.userName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setForm({ ...formSignUp, email: text })}
+          value={formSignUp.email}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={(text) => setForm({ ...formSignUp, password: text })}
+          value={formSignUp.password}
+        />
+        <View style={styles.rememberMeContainer}>
+          <TouchableOpacity style={styles.rememberMeBox}></TouchableOpacity>
+          <Text style={styles.rememberMeText}>Remember me</Text>
+        </View>
+        <View style={styles.socialSignUpContainer}>
+          <Text style={styles.orText}>Sign up with social account</Text>
+          <View style={styles.socialButtons}>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image source={require('../assets/icon/google.png')} style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image source={require('../assets/icon/facebook.png')} style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image source={require('../assets/icon/twitter.png')} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.signUpButton} onPress={onSubmit}>
+          <Text style={styles.buttonText}>Sign up</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={[styles.loginText, { fontFamily: 'Metropolis-Medium' }]}>
             Already have an account? <Text style={styles.loginLink}>→</Text>
           </Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.socialSignUpContainer}>
-        <Text style={styles.orText}>Or sign up with a social account</Text>
-        <View style={styles.socialButtons}>
-          <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('../assets/icon/google.png')} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.socialButton, { backgroundColor: 'white' }]}>
-            <Image source={require('../assets/icon/facebook.png')} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.licenseText}>Read User License Agreement</Text>
       </View>
     </View>
   );
 };
 
-const styles = {
-  container: {
+const styles = StyleSheet.create({
+  outerContainer: {
     flex: 1,
-    backgroundColor: 'white',
-    padding: 20,
+    backgroundColor: '#4BA3C7',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    width: '90%',
+    alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 28,
     marginBottom: 20,
+    color: '#333',
   },
   input: {
+    width: '100%',
     height: 50,
-    borderColor: 'gray',
+    borderColor: '#ddd',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: 15,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#f9f9f9',
   },
-  loginContainer: {
-    alignSelf: 'flex-end',
+  rememberMeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
     marginBottom: 20,
   },
-  loginText: {
-    color: 'black',
+  rememberMeBox: {
+    width: 20,
+    height: 20,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginRight: 10,
   },
-  loginLink: {
-    color: 'red',
+  rememberMeText: {
+    color: '#555',
+    fontSize: 14,
   },
   signUpButton: {
-    backgroundColor: 'red',
+    width: '100%',
+    backgroundColor: 'green',
     paddingVertical: 15,
-    borderRadius: 20,
+    borderRadius: 8,
     alignItems: 'center',
     marginBottom: 20,
   },
@@ -126,11 +150,12 @@ const styles = {
     fontWeight: 'bold',
   },
   socialSignUpContainer: {
-    marginTop: 40,
     alignItems: 'center',
+    marginBottom: 20,
   },
   orText: {
-    alignSelf: 'center',
+    fontSize: 14,
+    color: '#555',
     marginBottom: 10,
   },
   socialButtons: {
@@ -138,18 +163,31 @@ const styles = {
     justifyContent: 'center',
   },
   socialButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
     marginHorizontal: 10,
-    borderColor: 'gray',
+    borderColor: '#ddd',
     borderWidth: 1,
   },
   icon: {
     width: 24,
     height: 24,
+  },
+  loginText: {
+    color: '#555',
+    fontSize: 14,
+  },
+  loginLink: {
+    color: '#green',
+    fontSize: 14,
+  },
+  licenseText: {
+    fontSize: 12,
+    color: '#555',
   },
   loadingContainer: {
     flex: 1,
@@ -159,6 +197,6 @@ const styles = {
   loadingText: {
     fontSize: 20,
   },
-};
+});
 
 export default SignUpPages;

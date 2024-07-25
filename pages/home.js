@@ -39,6 +39,15 @@ const slideImages = [
     discount: '15$',
     rating: 10,
     reviews: 10
+  },
+  {
+    url: require('../assets/products/psu.jpg'),
+    caption: 'PSU 550 watt',
+    price: '200$',
+    oldPrice: '215$',
+    discount: '15$',
+    rating: 10,
+    reviews: 10
   }
 ];
 
@@ -55,10 +64,7 @@ const Home = () => {
           source={require('../assets/banner/banner1.jpg')}
           style={styles.headerImage}
         />
-        <Text style={styles.headerText}>Mungkin Anda Suka</Text>
-        <View style={styles.checkButtonContainer}>
-          <Text style={styles.checkButton}>Check</Text>
-        </View>
+        <Text style={styles.headerText}>Welcome To TokMer</Text>
       </View>
       <View style={styles.newSection}>
         <View style={styles.newSectionHeader}>
@@ -67,7 +73,7 @@ const Home = () => {
         </View>
         <Text style={styles.newSectionSubtitle}>You've never seen it before!</Text>
         <View style={styles.slideContainer}>
-          <Slide>
+          <Slide arrows={false}>
             {slides.map((slideGroup, index) => (
               <View key={index} style={styles.slideGroup}>
                 {slideGroup.map((slideImage, idx) => (
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     position: 'absolute',
-    top: 180,
+    top: 240,
     left: 20,
   },
   checkButtonContainer: {
